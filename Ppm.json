@@ -1,0 +1,105 @@
+{
+  "schema": "1.0",
+  "name": "boy-44",
+  "version": "1.0.0",
+  "description": "Conversational PMLL agent with a fast C core (signals/roster/CSV) and an LLM layer for high\u2011fidelity sportsbook decoding.",
+  "license": "MIT",
+  "homepage": "https://github.com/drQedwards/boy-44",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drQedwards/boy-44.git"
+  },
+  "authors": [
+    {
+      "name": "Dr. Josef Kurk Edwards",
+      "email": "n/a",
+      "roles": [
+        "author",
+        "maintainer"
+      ]
+    }
+  ],
+  "keywords": [
+    "PMLL",
+    "sports",
+    "betting",
+    "odds",
+    "decoder",
+    "LLM",
+    "signals",
+    "CSV",
+    "C",
+    "Python"
+  ],
+  "platforms": [
+    "linux-x86_64",
+    "darwin-arm64",
+    "darwin-x86_64",
+    "windows-x86_64"
+  ],
+  "dependencies": {
+    "build": [],
+    "runtime": []
+  },
+  "env": {
+    "CFLAGS": "-O3 -march=native -std=c11 -Wall -Wextra",
+    "LDFLAGS": ""
+  },
+  "build": {
+    "system": "make",
+    "cwd": "core-c",
+    "targets": [
+      "all"
+    ],
+    "artifacts": [
+      "core-c/bin/pmll_agent",
+      "core-c/lib/libpmll.a",
+      "core-c/include/pmll_core.h"
+    ]
+  },
+  "entrypoints": {
+    "cli": "core-c/bin/pmll_agent",
+    "python_agent": "agent/boy44_agent.py"
+  },
+  "scripts": {
+    "postinstall": [
+      "mkdir -p state",
+      "echo 'ts,number,source' > state/signals_log.csv || true",
+      "echo 'number,count,last_ts' > state/beliefs.csv || true"
+    ],
+    "demo": [
+      "core-c/bin/pmll_agent --base ./state ingest 44",
+      "core-c/bin/pmll_agent --base ./state who-wears 44 --active",
+      "core-c/bin/pmll_agent --base ./state recall --last 5"
+    ]
+  },
+  "config": {
+    "provider": {
+      "default": "local",
+      "description": "LLM provider: local|openai|vllm"
+    },
+    "model_name": {
+      "default": "llama3.1:8b",
+      "description": "Model name or path for local provider"
+    },
+    "odds_api_key": {
+      "default": "",
+      "description": "Key for odds provider (optional)"
+    },
+    "feeds_rosters_csv": {
+      "default": "core-c/data/rosters_mock.csv",
+      "description": "Path to roster CSV (replace with real feed)"
+    }
+  },
+  "files": {
+    "include": [
+      "core-c/include/*.h",
+      "core-c/bin/pmll_agent",
+      "core-c/lib/libpmll.a",
+      "core-c/data/*.csv",
+      "agent/**/*.py",
+      "README.md",
+      "LICENSE"
+    ]
+  }
+}
