@@ -1,0 +1,22 @@
+
+  {
+    "input": "44",
+    "output": "Signal recorded: number 44. (count=1)"
+  },
+  {
+    "input": "which players today are wearing number 44?",
+    "output": "NBA BOS \u2014 Robert Williams III (#44)\nNFL DET \u2014 Malcolm Rodriguez (#44)"
+  },
+  {
+    "input": "signal 44",
+    "output": "Signal recorded: number 44. (count=2)"
+  },
+  {
+    "input": "which players today are wearing number 44?",
+    "output": "NBA BOS \u2014 Robert Williams III (#44)\nNFL DET \u2014 Malcolm Rodriguez (#44)"
+  },
+  {
+    "input": "help",
+    "output": "Try: 'signal 44' or '44' to record a signal; or ask 'which players today are wearing number 44?'\nThis is a mock demo. Swap the roster loader to use real APIs."
+  }
+]
