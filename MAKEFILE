@@ -1,0 +1,11 @@
+CC ?= cc
+CFLAGS ?= -O2 -std=c11 -Wall -Wextra
+LDFLAGS ?= -lcurl
+
+all: espn_api
+
+espn_api: espn_api.c
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
+clean:
+	rm -f espn_api
